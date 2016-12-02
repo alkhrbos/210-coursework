@@ -1,0 +1,66 @@
+// q8.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <cstring>
+#include <string>
+#include <iostream>
+
+using namespace std;
+bool removevocals(string &str, int index, string &result)
+{
+	if (index<0)  //this is our base condition . because in the array index must stars from 0 
+	{
+		return false;
+	}
+	else
+	{
+		removevocals(str, index - 1, result);  // this is the recursive bar of the function . so it is gonna strat from the end of the array untill the beging 
+		switch (str[index]) // we use switch when we have multiple options to select from . same as if and else statments but it is more tidey. 
+		{
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
+		case 'A':
+		case 'E':
+		case 'I':
+		case 'O':
+		case 'U':
+			break; // if we find one of the cases then stop.
+		default: // similar to else statment 
+			result = result + str[index]; // if we dont find vowel letters then add that letter to the result (btfl)
+			break;
+		}
+	}
+	return true;
+}
+
+int main()
+{
+	string str = "beautiful";
+	int length = str.size();
+	string result;
+	removevocals(str, length, result);
+	cout << result << endl;
+	return 0;
+}
+
+
+
+Pseudocode question 8 
+
+
+
+
+BOOL REMOVEVOCALS (STR[] , INDEX , RESULT[])
+	If (index < 0 )  //this is our base condition . because in the array index must stars from 0 
+		Return false 
+	Else 
+		REMOVEVOCALS (str , INDEX -1 , result ); );  // this is the recursive bar of the function . so it is gonna strat from the end of the array untill the beging 
+
+	If str[index] is not in (a,e,i,o,u,A,E,I,O,U)		
+		Result ← Result + str[INDEX] // if we dont find vowel letters then asdd that letter to the result (btfl) 
+ 	Return true 
+
