@@ -1,0 +1,76 @@
+Question 6 : 
+
+#include "stdafx.h"
+#include <cstring> //for string function 
+#include <string>
+#include <iostream>
+using namespace std;
+
+void ReverseString(string str, int length, string &result) // means it will not return any value 
+{
+	char key = ' '; // for space 
+	int high = length - 1; // ignore last char becase the last char is end of string.
+	int low; 
+	for (int i = length - 1;i >= 0;i--) // this is  iterate from end of charecter array to the begining
+	{
+		if (str[i] == key || i == 0) // this statment will see if we find the space or the begining (0) in the array
+		{
+			if (i == 0)  // if it is end of the array 
+			{
+				low = i; // low of each word 
+			}
+			else
+			{
+				low = i + 1; // copy the first element after the space
+			}
+			for (int j = low;j <= high;j++) //  will start from low and go up to high increasing by one every time. a w e s o m e
+			{
+				result = result + str[j];  // copy each charecter from low to high into result. a , aw , awe, awes,aweso.....
+			}
+			if (i != 0)
+			{
+				result = result + key;  // means add awesome and space 		
+			}
+			high = i - 1; // once we copy awesome then move high before the space then we go to second word which (is)
+		}
+	}
+}
+
+int main()
+{
+	string str = "This is awesome"; 
+	int length = str.size();
+	string result;
+	ReverseString(str, length, result); //calling function 
+	cout << result << endl;
+	return 0;
+}
+
+
+pseudocode question 6 : 
+
+
+REVERSESTRING(STR,STRLENGTH,RESULT)    // means it will not return any value 
+ 
+1	key ← ' '  // for space
+1	high  ← STRLENGTH – 1 // ignore last char because the last char is end of string.
+1	low ← 0 
+n	for  i ← STRLENGTH -1 to zero // this is  iterate from end of charecter array to the begining
+
+n		if (STR[ i ] = key or i = 0 ) ) // this statment will see if we find the space or the begining (0) in the array
+
+n			if (i = 0)  // if it is end of the array
+n				low ← i 
+			else 
+n				low ← i + 1 // copy the first element after the space
+
+n*n			for j ← low to high ) //  will start from low and go up to high increasing by one every time. a w e s o m e
+
+n*n				RESULT ← RESULT + STR[ j] // copy each charecter from low to high into result. a , aw , awe, awes,aweso.....
+
+n			if ( i !=0)
+n				RESULT ← RESULT +  key // means add awesome and space 	
+n			high ← i -1 // once we copy awesome then move high before the space then we go to second word which (is)
+2n2+8n+3
+O (n2)
+ 
