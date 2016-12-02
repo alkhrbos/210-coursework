@@ -1,0 +1,84 @@
+Question 9 : 
+
+// binarysearch.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <vector>
+
+using namespace std;
+
+
+
+
+bool BinarySearch(int *arr, int fromvalue, int tovalue, int minindex, int maxindex)
+{
+	// to calculate the middle point i need to devide by 2 
+	int midpoint = maxindex + minindex; // adding the index. example  0 + 6 = 6 
+	if (midpoint % 2 == 1) // if the addition is odd. 
+	{
+		midpoint + 1; // if the adition is odd number then add one to be even.
+	}
+	midpoint = midpoint / 2; // then devide it by 2 		
+	
+	if (arr[midpoint] >= fromvalue && arr[midpoint] <= tovalue) //  the value of the midlle point. then we compare 
+	{
+		return true;
+	}
+	else
+	{
+		if (minindex == maxindex)
+		{
+			return false; // if we cannot devide the array further so it means we cannot find it 
+		}
+		if (tovalue<arr[midpoint])
+		{
+			return BinarySearch(arr, fromvalue, tovalue, minindex, midpoint - 1); // find the values of the left side of the midlle point 
+		}
+		else
+		{
+			return BinarySearch(arr, fromvalue, tovalue, midpoint + 1, maxindex); // find the values of the right side of the midlle point 
+		}
+	}
+}
+int main()
+{
+	vector<int> arr = {20,60,120,200,400,600,800 };
+	BinarySearch(&arr[0], 120, 400,0, arr.size()-1); // from value: 120 , to value: 400
+	return 0;
+}
+
+
+
+
+Pseudocode question 9 : 
+
+BOOL BINARYSEARCH (ARR [] , FROMVALUE, TOVALUE,  MININDEX, MAXINDEX  )
+
+1	midpoint ← MAXINDEX  + MINIINDEX// adding the index. example  0 + 6 = 6
+
+1	if (midpoint % 2 = 1) // if the addition is odd.
+
+
+1		midpoint + 1  //if the adition is odd number then add one to be even.
+
+
+1	midpoint ← midpoint / 2 // then devide it by 2
+
+1	if (arr[midpoint] >= fromvalue && arr[midpoint] <= TOVALUE) //  the value of the midlle point. then we compare 
+
+1		return true 
+else
+1		if (minindex = MAXINDEX ) // if we cannot devide the array further so it means we cannot find it 
+1			return false 
+	
+1		if (TOVALUE<arr[midpoint])  // find the values of the left side of the midlle point
+O(n/2)			return BINARYSEARCH(arr, FROMVALUE, TOVALUE, minindex, midpoint - 1) 
+
+		else
+		
+O(n/2)			return BINARYSEARCH(arr, FROMVALUE, TOVALUE, midpoint + 1, MAXINDEX ); // find the values of the right side of the midlle point 
+
+2*O(n/2)+9
+O (logn)
+
