@@ -1,0 +1,61 @@
+// q7.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+
+
+bool IsPrime(int number,int div)
+{
+	if(number<2) // prime numbers should starts from 2 
+	{
+		return false;
+	}
+	if(div==1) // this is our base condition . example to check 5 is prime or not devide by 4 , 3, 2 ,1 and if our div is 1 then it means it is prime .
+	{
+		return true;
+	}
+	else
+	{
+		if(number%div==0) // when we devide a number and the reminder is zero so it is not a prime number 
+		{
+			return false;
+		}
+		else
+		{
+			return IsPrime(number,div-1); // this is recursion . we called a function it self. this is a place where number is moving or decreasing like 4 , 3, 2, 1
+		}
+	}
+}
+
+int main ()
+{
+	int number;
+	cout << "Enter a number\n";
+	cin >>  number;
+	if(IsPrime(number,number-1)) 
+	{
+		cout <<"Number is prime\n";
+	}
+
+	return 0;
+}
+
+
+
+
+
+Pseudocode question 7: 
+
+BOOL ISPRIME (NUMBER , DIV)
+	if (NUMBER < 2 ) // prime numbers should starts from 2 
+		return false 
+	if (div = 1 )  ) // this is our base condition . example to check 5 is prime or not devide by 4 , 3, 2 ,1 and if our div is 1 then it means it is prime .
+		return true 
+	else 
+		if  NUMBER isdivisible by div  // when we devide a number and the reminder is zero so it is not a prime number 
+			return false 
+		else 
+			return ISPRIME (NUMBER, DIV -1 ) ); // this is recursion . we called a function it self. this is a place where number is moving or decreasing like 4 , 3, 2, 1
+
+
