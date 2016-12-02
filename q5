@@ -1,0 +1,63 @@
+Question 5 : pseudocode 
+
+
+MATRIX ADD ( A , B )
+1	If (A. row !=  B. row )
+1		Return fales 
+1	If (A. col != B. col)
+1		Return fales 
+
+n	For  i ← 1 to  A. row  //  start from one and go until the end of row
+n*n		For  j ← 1 to A . col  //  start from one and go until the end of row
+n*n			Result [i ] [ j ] ← A [i ] [ j ] + B [i ] [ j ]
+
+2n2+n+4
+O (n2)
+
+MATRIX SUB ( A , B )
+1	If (A. row !=  B. row )
+1		Return fales 
+1	If (A. col != B. col)
+1		Return fales 
+
+n	For ( i ← 1 ;  i < A. row ; i ++ )
+n*n		For ( j ← 1 ; j < A . col ; j++ )
+n*n			Result [i ] [ j ] ← A [i ] [ j ] - B [i ] [ j ]
+
+2n2+n+4
+O (n2)
+
+
+ 
+SCALAR MUL ( A , num ) 
+n	For ( i ← 1 ;  i < A. row ; i ++ )
+n*n		For ( j ← 1 ; j < A . col ; j++ )
+n*n			Result [i ] [ j ] ← num * A [i ] [ j ]
+
+2n2+n
+O (n2) 
+
+MATRIX MUL (A , B)
+1	If ( A.row != B.col )
+1		Return fales 
+
+n	For  i ← 1 to A. row 
+n*n		 For ( j ← 1 ; j < A . col ; j++ )
+n*n			Sum ←  0 
+n*n *n		For ( n ← I ; n < B . col ; n++ )
+n*n *n			Sum ← Sum +A [ i] [n ] * B [ n ] [ j ]
+
+n*n			Result [ i] [j ] ← sum 
+
+2n3+ 2n2+n+2
+O (n3)
+
+D = MATRIX MUL (B , C ) //multiply b * c 
+
+E = MATRIX ADD (B , C) // inside the brackets add b and c 
+
+F = SCALAR MUL (E , 2) // multiply 2 by the result of addition 
+
+A = MATRIX SUB (D , F) // subtract d by f 
+
+ 
