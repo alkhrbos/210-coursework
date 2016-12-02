@@ -1,0 +1,15 @@
+Question 4 :
+
+
+IS PRIME (NUM)                               
+1	If NUM< 2 
+1		Return false
+n	For I ← 2 ; I < NUM ; I ++
+n	If  NUM % I = 0
+n		Return false 
+
+1	Return true 
+
+
+3n+ 3 
+O (n )
