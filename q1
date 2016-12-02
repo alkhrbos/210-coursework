@@ -1,0 +1,19 @@
+#include "stdafx.h"
+#include <stdlib.h> // for rand function 
+
+void main() // means this function will not return any value
+{
+	int list[] = { 10 , 20 , 30 , 40 , 50 , 60 , 70 , 80 , 90 , 100 }; //declare array
+	for (int i = 0; i < 10; i++) // starts from 0 and it is 10 numbers . i ++ means continue shuffling
+	{
+		int randnum = rand(); // randnum function to get any other numbers to swap it.
+		randnum = randnum % 10; // use % to generate randnum numbers within a specific range.
+		if (randnum == 1) //saftey ckeck . so we dont swap numbers on same location.
+		{
+			continue; // it means it will go back and increase the value of i 
+		}
+		int tempnum = list[randnum]; //tempnum means to store the value in temperray location
+		list[randnum] = list[i];  //swap them
+		list[i] = tempnum;
+	}
+}
