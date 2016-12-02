@@ -1,0 +1,99 @@
+// q2.cpp : Defines the entry point for the console application.
+//	
+
+#include "stdafx.h" 
+#include <iostream> //for cin and cout
+#include <vector> //for array
+
+using namespace::std;
+bool IsPrime(unsigned long long number) // checking if the number prime or not 
+{
+	if (number<2) // 1 or less are not prime. Prime numbers starts from 2.
+	{
+		return false;
+	}
+	for (unsigned long long i = 2;i<number;i++)
+	{
+		if (number%i == 0) // any number that we can devide it and the reminder is zero than it is not prime 
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+unsigned long long factorial(long number)
+{
+	if (number<0) // for negative number factorial is zero 
+	{
+		return 0;
+	}
+	if (number<2) // factorial numbers for 0 and 1 factorial is one 
+	{
+		return 1;
+	}
+	unsigned long long result = 1;
+	for (long i = 2;i <= number;i++)
+	{
+		result = result*i; //  for calculating the factorial 
+	}
+	return result;
+}
+
+int main()
+{
+	long number;
+	cout << "Enter a number to find number of zeros in factorial\n"; // example 5 
+	cin >> number;
+	unsigned long long fact = factorial(number);
+	cout << "result factorial is " << fact<<endl;
+	std::vector<long> primefact; //declare an array to store prime factors.
+	//120/2 = 60
+	//60/2 = 30
+	//30/2= 15
+	//15/3=5
+	// 5 is prime
+	
+	
+	while (fact>1)
+	{
+		if (IsPrime(fact)) // this is a prime number. can't divide further
+		{
+			primefact.push_back(fact);
+			break;
+		}
+		else
+		{
+			for (long i = 2;i<fact;i++)
+			{
+				if (IsPrime(i) && fact%i == 0)
+				{
+					primefact.push_back(i);
+					fact = fact / i;
+					break;
+				}
+			}
+		}
+	}
+
+	int count = 0;
+	for (unsigned int i = 0;i < primefact.size();i++) //size foncution to give us the size of the array 
+	{
+		if(primefact[i]==5) // calculate how many fives we have
+		{
+			count++;
+		}
+	}
+	if(count)
+	{
+		cout<<"Number of trailing zeros are"<<count<<endl;
+	}	
+	else
+	{
+		cout << "There are no number of trailing zeros" <<endl;		
+	}
+	return 0;
+}
+
+
+
