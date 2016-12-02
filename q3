@@ -1,0 +1,146 @@
+// q3.cpp : Defines the entry point for the console application.
+
+#include "stdafx.h"
+#include <vector>
+#include <map>
+#include <iostream>
+using namespace::std;
+
+bool IsPrime(long number)
+{
+	if (number<2) // 1 or less are not prime. Prime numbers starts from 2.
+	{
+		return false;
+	}
+	for (long i = 2;i<number;i++)
+	{
+		if (number%i == 0)  // any number that we can devide it and the remainder is zero than it is not prime 
+
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void GetPrimeFactors(long number, std::vector<long> &primefact)
+{
+	while (number > 1)
+	{
+		if (IsPrime(number)) // this is a prime number. can't divide further
+		{
+			primefact.push_back(number);
+			break; //stop when it is a prime number 
+			
+		}
+		else
+		{
+			//when the number it it not prime .example 4
+			for (long i = 2;i < number;i++)
+			{
+				if (IsPrime(i) && number%i == 0)
+				{
+					primefact.push_back(i);
+					number = number / i; // example 120/2=60
+					break;
+				}
+			}
+		}
+	}
+}
+
+bool IsPerfectSquare(long number, int &highestperfectsquare)
+{
+	highestperfectsquare = 1;
+	std::vector<long> primefact;
+	GetPrimeFactors(number, primefact); // get the prime factor and store it in an array.
+	if (primefact.empty())
+	{
+		return false; // if our array is enpty means  there is no prime factor so return fales.
+	}
+	std::map<long, long> valuekeymap;
+	// we are using the map because we want to store the prime factore to know how many times is repeated to get the perfect square.
+	for (int i = 0;i < primefact.size();i++) // it will loop throuth the array of prime factor. 
+	{
+		long value=primefact[i]; // get any prime factor from our array.
+		valuekeymap[value]++; // store how many times that prime factor came. (increase the key).
+	}
+	std::map<long, long>::iterator mapitr = valuekeymap.begin(); //start from beginning of the map
+	while(mapitr!=valuekeymap.end()) // until the end of the map 
+	{
+		long value = mapitr->first;  //in map we have value 
+		long key = mapitr->second;// we have key.
+		if (key % 2 != 0) // if our key it is not even so the number is not perfect square.
+		{
+			return false;
+		}		
+		while (key>1) // 
+		{
+			highestperfectsquare = highestperfectsquare*value; //2*2*2*2*2
+			key = key - 2; //once we did the multiplication. Remove the pair.
+		}
+		mapitr++; // go to the next pair in map 
+	}
+	return true;
+}
+int main()
+{
+	long number;
+	std::cout<<"Enter a number to find perfect square"<<endl;
+	cin>>number;
+	for (int i = number;i>0;i--) // example if we entered a number and it is not perfect square so it gonna decrease untill we find the perfect square.
+	{
+		int highestperfectsquare;
+		if (IsPerfectSquare(i, highestperfectsquare)) // example if we have i = 49 then the perfect square function will return number 7 in  this vairable highestperfectsquare
+		{
+			cout<<"For number "<<i<<" perfect square is "<<highestperfectsquare<<endl;
+			break;
+		}
+	}
+	return 0;
+}
+
+
+
+Question 3 pseudocode:
+
+ISPRIME (NUM)  // checking if the number prime or not
+If NUM < 2 
+    		Return fales 
+For i ←2 ; i < NUM ; i ++ 
+    		If NUM % i = 0  // it should not be the reminder is zero
+   			Return fales 
+Return true 
+
+
+GETPRIMEFACTORS ( N , PRIMEFACT )  
+WHILE ( N > 1 )
+    		If N IS PRIME    	// this is a prime number. can't divide further
+     			Add number to the array 
+			Stop the while loop  //stop when it is a prime number
+Else 
+For i ← 2 ; i < N ; i ++ 
+If i ISPRIME and N% i = 0 //when the number it is not prime .example 4
+
+Add i to the array 
+N ← N divide by i
+Stop the for loop
+
+ 
+ISPERFECTSQUAR (N , HIGHESTPERFECTSQUAR ) 
+GETPRIMEFACTORS for N in primefact array // get the prime factor and store it in an array.
+
+IF primefact is empty 
+    		Return fales 
+
+Create a key,value binary tree map as valuekeymap.
+For i ← 1 to length[primefact]
+		Increase Valuekeymap[primefact[i]] 
+
+For i←1 to length[valuekeymap]
+If valuekeymap[i].value is odd
+Return fales
+HIGHESTPERFECTSQUAR← Multiply value key times
+Return true
+    
+
